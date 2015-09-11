@@ -1,0 +1,20 @@
+<h1>My Products</h1>
+
+<% @products.each do |product| %>
+  <div class="product-item">
+    <%= image_tag(product.image, class: 'product-image') %>
+    <h3><%= product.name %></h3>
+    <h2><%= number_to_currency(product.price) %></h2>
+    <form action="sale/create" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_VWHZPC8v77pP6In5qoqYv3gb"
+        data-amount="<%= product.price * 100 %>"
+        data-name="<%= product.name %>"
+        data-description="<%= product.description %>"
+        data-image="<% product.image %>"
+        data-locale="auto">
+      </script>
+    </form>
+  </div>
+<% end %>
